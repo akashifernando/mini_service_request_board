@@ -124,53 +124,103 @@ The API is fully documented and structured under the `/api` prefix. Private endp
 
 #### 📌 Endpoint Details & Payload Specs
 
-#### 🔍 `GET /api/jobs`
+### 🔑 Authentication Endpoints
+
+#### 1. 🔍 Register a New User
+* **Method & Path**: `POST http://localhost:5001/api/auth/register`
+* **Example curl Request**:
+  ```bash
+  curl -X POST http://localhost:5001/api/auth/register \
+    -H "Content-Type: application/json" \
+    -d '{
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "password": "password123"
+    }'
+  ```
+
+#### 2. 🔑 Authenticate (Login) User
+* **Method & Path**: `POST http://localhost:5001/api/auth/login`
+* **Example curl Request**:
+  ```bash
+  curl -X POST http://localhost:5001/api/auth/login \
+    -H "Content-Type: application/json" \
+    -d '{
+      "email": "jane@example.com",
+      "password": "password123"
+    }'
+  ```
+
+#### 3. 👤 Get Current User Profile (Private)
+* **Method & Path**: `GET http://localhost:5001/api/auth/me`
+* **Headers**: `Authorization: Bearer <your_jwt_token>`
+* **Example curl Request**:
+  ```bash
+  curl -X GET http://localhost:5001/api/auth/me \
+    -H "Authorization: Bearer <your_jwt_token>"
+  ```
+
+---
+
+### 🛠️ Job Request Endpoints
+
+#### 1. 🔍 List & Filter Service Requests
+* **Method & Path**: `GET http://localhost:5001/api/jobs`
 * **Query Parameters**:
   * `category` *(Optional)*: Filter by job category. Supported: `Plumbing`, `Electrical`, `Painting`, `Joinery`, `Gardening`, `Cleaning`, `Other`.
   * `status` *(Optional)*: Filter by job status. Supported: `Open`, `In Progress`, `Closed`.
   * `search` *(Optional)*: Keyword search against `title` and `description` fields (case-insensitive regex search).
-* **Example Request**:
-  `GET /api/jobs?category=Plumbing&status=Open&search=leak`
-
----
-
-#### 🆕 `POST /api/jobs`
-* **Headers**: `Authorization: Bearer <your_jwt_token>`
-* **Request Body** *(All fields required)*:
-  ```json
-  {
-    "title": "Fix leaking bathroom faucet",
-    "description": "The master bathroom faucet is dripping continuously and needs a washer replacement.",
-    "category": "Plumbing",
-    "location": "London, UK",
-    "contactName": "John Doe",
-    "contactEmail": "john@example.com"
-  }
+* **Example curl Request**:
+  ```bash
+  curl -X GET "http://localhost:5001/api/jobs?category=Plumbing&status=Open&search=leak"
   ```
 
----
+#### 2. 📄 Get Single Job Details by ID
+* **Method & Path**: `GET http://localhost:5001/api/jobs/:id`
+* **Example curl Request**:
+  ```bash
+  curl -X GET http://localhost:5001/api/jobs/65f123456789abcdef012345
+  ```
 
-#### 🔄 `PATCH /api/jobs/:id`
+#### 3. 🆕 Create a Service Request (Private)
+* **Method & Path**: `POST http://localhost:5001/api/jobs`
 * **Headers**: `Authorization: Bearer <your_jwt_token>`
-* **Request Body** *(Only status is allowed and validated)*:
-  ```json
-  {
-    "status": "In Progress"
-  }
+* **Example curl Request**:
+  ```bash
+  curl -X POST http://localhost:5001/api/jobs \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <your_jwt_token>" \
+    -d '{
+      "title": "Fix leaking bathroom faucet",
+      "description": "The master bathroom faucet is dripping continuously and needs a washer replacement.",
+      "category": "Plumbing",
+      "location": "London, UK",
+      "contactName": "John Doe",
+      "contactEmail": "john@example.com"
+    }'
+  ```
+
+#### 🔄 Update Job Status (Private)
+* **Method & Path**: `PATCH http://localhost:5001/api/jobs/:id`
+* **Headers**: `Authorization: Bearer <your_jwt_token>`
+* **Example curl Request**:
+  ```bash
+  curl -X PATCH http://localhost:5001/api/jobs/65f123456789abcdef012345 \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <your_jwt_token>" \
+    -d '{
+      "status": "In Progress"
+    }'
   ```
   *(Status must be one of: `Open`, `In Progress`, `Closed`)*
 
----
-
-#### 🗑️ `DELETE /api/jobs/:id`
+#### 🗑️ Delete Service Request (Private)
+* **Method & Path**: `DELETE http://localhost:5001/api/jobs/:id`
 * **Headers**: `Authorization: Bearer <your_jwt_token>`
-* **Response**:
-  ```json
-  {
-    "success": true,
-    "message": "Job request successfully deleted",
-    "data": {}
-  }
+* **Example curl Request**:
+  ```bash
+  curl -X DELETE http://localhost:5001/api/jobs/65f123456789abcdef012345 \
+    -H "Authorization: Bearer <your_jwt_token>"
   ```
 
 ---
