@@ -91,7 +91,7 @@ export default function NewJob() {
 
   if (authLoading) {
     return (
-      <div className="flex-grow flex items-center justify-center py-20 text-slate-400 font-semibold animate-pulse">
+      <div className="flex-grow flex items-center justify-center py-20 text-slate-500 font-semibold animate-pulse">
         Verifying user credentials...
       </div>
     );
@@ -105,7 +105,7 @@ export default function NewJob() {
       {/* Back button */}
       <Link 
         href="/"
-        className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white bg-slate-900/60 border border-slate-800 hover:border-slate-700 px-3.5 py-2 rounded-lg transition-all duration-200 mb-8"
+        className="inline-flex items-center text-xs font-bold text-slate-600 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300 px-3.5 py-2 rounded-lg transition-all duration-150 mb-8"
       >
         <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -113,15 +113,12 @@ export default function NewJob() {
         Back to Dashboard
       </Link>
 
-      <div className="bg-slate-900/40 backdrop-blur-md rounded-2xl border border-slate-800/80 p-8 shadow-xl relative">
-        {/* Ambient glow */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
-
-        <div className="border-b border-slate-800/80 pb-6 mb-8">
-          <h1 className="text-2xl font-black text-white">Post a Service Request</h1>
-          <p className="text-sm text-slate-400 font-medium mt-1">
-            Fill in the details below to describe your task. Tradespeople will review and claim your project.
+      <div className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm">
+        
+        <div className="border-b border-slate-100 pb-5 mb-6">
+          <h1 className="text-xl font-bold text-slate-900">Post a Service Request</h1>
+          <p className="text-xs text-slate-500 font-semibold mt-1">
+            Complete the fields below to describe your service request.
           </p>
         </div>
 
@@ -129,7 +126,7 @@ export default function NewJob() {
           
           {/* Display validation or server error */}
           {(validationError || error) && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-xs font-semibold flex items-center space-x-2">
+            <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg text-xs font-semibold flex items-center space-x-2">
               <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
@@ -141,7 +138,7 @@ export default function NewJob() {
             
             {/* Title */}
             <div className="md:col-span-2">
-              <label htmlFor="title" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="title" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Job Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -152,13 +149,13 @@ export default function NewJob() {
                 placeholder="e.g. Need a plumber for a leaking kitchen tap"
                 maxLength={100}
                 required
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-200 placeholder-slate-650 outline-none focus:ring-1 focus:ring-purple-500/30 transition-all duration-200"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label htmlFor="category" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="category" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Category <span className="text-red-500">*</span>
               </label>
               <select
@@ -166,10 +163,10 @@ export default function NewJob() {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-300 outline-none transition-all duration-200 cursor-pointer"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-700 outline-none transition-all duration-150 cursor-pointer"
               >
                 {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat} className="bg-slate-950 text-slate-300">
+                  <option key={cat} value={cat}>
                     {cat}
                   </option>
                 ))}
@@ -178,7 +175,7 @@ export default function NewJob() {
 
             {/* Location */}
             <div>
-              <label htmlFor="location" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="location" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Location (e.g. Glasgow) <span className="text-red-500">*</span>
               </label>
               <input
@@ -188,13 +185,13 @@ export default function NewJob() {
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="e.g. Glasgow West End"
                 required
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-200 placeholder-slate-650 outline-none focus:ring-1 focus:ring-purple-500/30 transition-all duration-200"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
               />
             </div>
 
             {/* Description */}
             <div className="md:col-span-2">
-              <label htmlFor="description" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="description" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Detailed Description <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -202,19 +199,19 @@ export default function NewJob() {
                 rows={5}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Provide details about the issue. What needs fixing? When is the best time for the tradesperson to visit? Is access readily available?"
+                placeholder="Provide details about the issue. What needs fixing?"
                 required
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-200 placeholder-slate-650 outline-none focus:ring-1 focus:ring-purple-500/30 transition-all duration-200 resize-none"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150 resize-none"
               />
             </div>
 
-            <div className="md:col-span-2 border-t border-slate-800/80 pt-6 mt-2">
-              <h3 className="text-sm font-bold text-slate-200 mb-4">Contact Details</h3>
+            <div className="md:col-span-2 border-t border-slate-100 pt-5 mt-2">
+              <h3 className="text-sm font-bold text-slate-900">Contact Details</h3>
             </div>
 
             {/* Contact Name */}
             <div>
-              <label htmlFor="contactName" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="contactName" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Contact Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -224,13 +221,13 @@ export default function NewJob() {
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Jane Smith"
                 required
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-200 placeholder-slate-650 outline-none focus:ring-1 focus:ring-purple-500/30 transition-all duration-200"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
               />
             </div>
 
             {/* Contact Email */}
             <div>
-              <label htmlFor="contactEmail" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="contactEmail" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Contact Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -240,16 +237,16 @@ export default function NewJob() {
                 onChange={(e) => setContactEmail(e.target.value)}
                 placeholder="jane@example.com"
                 required
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-200 placeholder-slate-650 outline-none focus:ring-1 focus:ring-purple-500/30 transition-all duration-200"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
               />
             </div>
 
           </div>
 
-          <div className="pt-4 border-t border-slate-800/80 flex items-center justify-end space-x-4">
+          <div className="pt-5 border-t border-slate-100 flex items-center justify-end space-x-4">
             <Link
               href="/"
-              className="text-slate-400 hover:text-white px-5 py-3 text-sm font-semibold hover:bg-slate-800/40 rounded-xl transition-all duration-200"
+              className="text-slate-600 hover:text-slate-900 px-4 py-2.5 text-sm font-semibold hover:bg-slate-100 rounded-lg transition-all duration-150"
             >
               Cancel
             </Link>
@@ -257,7 +254,7 @@ export default function NewJob() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-lg text-sm shadow-sm active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
             >
               {loading ? (
                 <div className="flex items-center space-x-2">

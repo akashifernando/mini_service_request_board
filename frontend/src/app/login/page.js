@@ -42,26 +42,22 @@ export default function Login() {
   };
 
   return (
-    <div className="flex-grow flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative">
-      <div className="max-w-md w-full space-y-8 bg-slate-900/40 backdrop-blur-md rounded-2xl border border-slate-800/80 p-8 shadow-xl shadow-purple-500/5 relative">
+    <div className="flex-grow flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      <div className="max-w-md w-full space-y-6 bg-white border border-slate-200 rounded-xl p-8 shadow-sm">
         
-        {/* Glow */}
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
-        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
-
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white">
-            Welcome Back
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+            Sign In
           </h2>
-          <p className="mt-2 text-sm text-slate-400 font-medium">
-            Sign in to manage and post job requests
+          <p className="mt-1.5 text-xs text-slate-500 font-semibold uppercase tracking-wider">
+            Access the Service Request Board
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           {/* Display validation or server error */}
           {(validationError || error) && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg text-xs font-semibold flex items-center space-x-2 animate-shake">
+            <div className="bg-red-50 border border-red-100 text-red-700 p-3 rounded-lg text-xs font-semibold flex items-center space-x-2">
               <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
@@ -72,7 +68,7 @@ export default function Login() {
           <div className="space-y-4">
             {/* Email Address */}
             <div>
-              <label htmlFor="email-address" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="email-address" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Email Address
               </label>
               <input
@@ -83,13 +79,13 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-200 placeholder-slate-600 outline-none focus:ring-1 focus:ring-purple-500/30 transition-all duration-200"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+              <label htmlFor="password" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 Password
               </label>
               <input
@@ -100,16 +96,16 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-slate-950/70 border border-slate-800 focus:border-purple-500/50 rounded-xl py-3 px-4 text-sm text-slate-200 placeholder-slate-600 outline-none focus:ring-1 focus:ring-purple-500/30 transition-all duration-200"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
               />
             </div>
           </div>
 
-          <div>
+          <div className="pt-2">
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 text-white py-3 px-4 rounded-xl text-sm font-bold shadow-lg shadow-purple-500/10 hover:shadow-purple-500/20 active:scale-[0.98] focus:outline-none transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
+              className="w-full flex justify-center bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 px-4 rounded-lg text-sm font-bold shadow-sm active:scale-[0.98] focus:outline-none transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
             >
               {loading ? (
                 <div className="flex items-center space-x-2">
@@ -126,10 +122,10 @@ export default function Login() {
           </div>
         </form>
 
-        <div className="text-center pt-2">
-          <p className="text-xs text-slate-400 font-semibold">
+        <div className="text-center pt-2 border-t border-slate-100">
+          <p className="text-xs text-slate-500 font-semibold">
             Don't have an account?{' '}
-            <Link href="/register" className="text-purple-400 hover:text-purple-300 font-bold transition-colors duration-200 ml-1">
+            <Link href="/register" className="text-indigo-600 hover:text-indigo-700 font-bold transition-colors duration-150 ml-1">
               Sign Up Now
             </Link>
           </p>
