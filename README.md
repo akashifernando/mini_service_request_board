@@ -379,10 +379,17 @@ The API is fully documented and structured under the `/api` prefix. Private endp
 ## ⚙️ Environment Variables
 
 ### Backend (`backend/.env`)
-Create a `.env` file inside the `backend` directory (populated automatically by our seeder):
+Create a `.env` file inside the `backend` directory:
 ```env
 PORT=5001
+
+# MONGODB_URI - Choose depending on your execution environment:
+# 1. Local Development (using Docker Compose MongoDB):
 MONGODB_URI=mongodb://127.0.0.1:27018/service-request-board
+
+# 2. Production (using MongoDB Atlas Cloud Cluster):
+# MONGODB_URI=mongodb+srv://akashanifernando_db_user:TJXnHpsc79In7R9l@cluster0.cxow04v.mongodb.net/service-request-board?retryWrites=true&w=majority
+
 JWT_SECRET=supersecretkeyforglobaltnaassessment
 NODE_ENV=development
 ```
