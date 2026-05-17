@@ -55,14 +55,14 @@ export default function Register() {
   };
 
   return (
-    <div className="flex-grow flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
-      <div className="max-w-md w-full space-y-6 bg-white border border-slate-200 rounded-xl p-8 shadow-sm">
+    <div className="flex-grow flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-md w-full space-y-6 bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80 rounded-2xl p-8 shadow-xl shadow-zinc-950/20">
         
         <div className="text-center">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-black tracking-tight text-zinc-100">
             Create an Account
           </h2>
-          <p className="mt-1.5 text-xs text-slate-500 font-semibold uppercase tracking-wider">
+          <p className="mt-1.5 text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest">
             Join the Service Request Board
           </p>
         </div>
@@ -70,7 +70,7 @@ export default function Register() {
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           {/* Display validation or server error */}
           {(validationError || error) && (
-            <div className="bg-red-50 border border-red-100 text-red-700 p-3 rounded-lg text-xs font-semibold flex items-center space-x-2">
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-xs font-semibold flex items-center space-x-2">
               <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
@@ -81,7 +81,7 @@ export default function Register() {
           <div className="space-y-4">
             {/* Full Name */}
             <div>
-              <label htmlFor="name" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="name" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Full Name
               </label>
               <input
@@ -92,13 +92,13 @@ export default function Register() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="John Doe"
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-100 placeholder-zinc-500 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
 
             {/* Email Address */}
             <div>
-              <label htmlFor="email-address" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="email-address" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Email Address
               </label>
               <input
@@ -109,13 +109,13 @@ export default function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-100 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="password" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Password
               </label>
               <input
@@ -126,13 +126,13 @@ export default function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="At least 6 characters"
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-100 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
 
             {/* Confirm Password */}
             <div>
-              <label htmlFor="confirm-password" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="confirm-password" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Confirm Password
               </label>
               <input
@@ -143,7 +143,7 @@ export default function Register() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-100 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 px-4 rounded-lg text-sm font-bold shadow-sm active:scale-[0.98] focus:outline-none transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
+              className="w-full flex justify-center bg-violet-600 hover:bg-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] text-white py-3 px-4 rounded-xl text-sm font-bold shadow-sm active:scale-[0.98] focus:outline-none transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
             >
               {loading ? (
                 <div className="flex items-center space-x-2">
@@ -169,10 +169,10 @@ export default function Register() {
           </div>
         </form>
 
-        <div className="text-center pt-2 border-t border-slate-100">
-          <p className="text-xs text-slate-500 font-semibold">
+        <div className="text-center pt-4 border-t border-zinc-800/60">
+          <p className="text-xs text-zinc-500 font-semibold">
             Already have an account?{' '}
-            <Link href="/login" className="text-indigo-600 hover:text-indigo-700 font-bold transition-colors duration-150 ml-1">
+            <Link href="/login" className="text-violet-400 hover:text-violet-300 font-bold transition-colors duration-150 ml-1 hover:underline">
               Sign In
             </Link>
           </p>

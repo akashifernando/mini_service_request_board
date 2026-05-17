@@ -11,13 +11,13 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
 const getStatusBadgeStyles = (status) => {
   switch (status) {
     case 'Open':
-      return 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+      return 'bg-emerald-500/10 text-emerald-450 border border-emerald-500/20';
     case 'In Progress':
-      return 'bg-amber-50 text-amber-700 border border-amber-200';
+      return 'bg-amber-500/10 text-amber-450 border border-amber-500/20';
     case 'Closed':
-      return 'bg-slate-100 text-slate-600 border border-slate-200';
+      return 'bg-zinc-800 text-zinc-400 border border-zinc-700';
     default:
-      return 'bg-slate-50 text-slate-600 border border-slate-200';
+      return 'bg-zinc-850 text-zinc-400 border border-zinc-800';
   }
 };
 
@@ -147,12 +147,12 @@ export default function JobDetails() {
   });
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow relative">
       
       {/* Back button */}
       <Link 
         href="/"
-        className="inline-flex items-center text-xs font-bold text-slate-600 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300 px-3.5 py-2 rounded-lg transition-all duration-150 mb-8"
+        className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white bg-zinc-900/40 hover:bg-zinc-800 border border-zinc-800/80 px-4 py-2.5 rounded-xl transition-all duration-200 mb-8 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]"
       >
         <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -163,39 +163,44 @@ export default function JobDetails() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         
         {/* Main Details Panel */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-8 shadow-sm space-y-6">
+        <div className="lg:col-span-2 bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-zinc-800/80 p-8 shadow-xl shadow-zinc-950/20 space-y-6">
           
           {/* Header */}
-          <div className="border-b border-slate-100 pb-5 space-y-3">
+          <div className="border-b border-zinc-800/60 pb-6 space-y-4">
             <div className="flex flex-wrap gap-2 items-center">
-              <span className="bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-0.5 rounded text-xs font-semibold">
+              <span className="bg-violet-500/10 text-violet-400 border border-violet-500/20 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
                 {category}
               </span>
-              <span className={`px-2.5 py-0.5 rounded text-xs font-semibold ${getStatusBadgeStyles(status)}`}>
+              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${getStatusBadgeStyles(status)}`}>
                 {status}
               </span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 leading-snug">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-100 leading-snug">
               {title}
             </h1>
-            <div className="flex items-center text-slate-500 text-xs font-semibold space-x-4">
-              <span className="flex items-center">
-                <svg className="w-4 h-4 text-slate-400 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <div className="flex flex-wrap items-center text-zinc-450 text-xs font-semibold gap-y-2 gap-x-6">
+              <span className="flex items-center text-zinc-300">
+                <svg className="w-4 h-4 text-zinc-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 {location}
               </span>
-              <span>Posted {formattedDate}</span>
+              <span className="flex items-center text-zinc-400">
+                <svg className="w-4 h-4 text-zinc-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Posted {formattedDate}
+              </span>
             </div>
           </div>
 
           {/* Description */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+          <div className="space-y-3">
+            <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
               Project Description
             </h3>
-            <p className="text-sm text-slate-700 leading-relaxed font-medium whitespace-pre-wrap">
+            <p className="text-sm text-zinc-300 leading-relaxed font-medium whitespace-pre-wrap">
               {description}
             </p>
           </div>
@@ -206,20 +211,20 @@ export default function JobDetails() {
         <div className="space-y-6">
           
           {/* Contact Details Card */}
-          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
-            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100 pb-3">
+          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80 rounded-2xl p-6 shadow-xl shadow-zinc-950/20 space-y-4">
+            <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/60 pb-3">
               Contact Details
             </h3>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="text-xs text-slate-400 font-semibold mb-0.5">Name</p>
-                <p className="font-bold text-slate-800">{contactName}</p>
+                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mb-0.5">Contact Name</p>
+                <p className="font-extrabold text-zinc-200">{contactName}</p>
               </div>
               <div>
-                <p className="text-xs text-slate-400 font-semibold mb-0.5">Email Address</p>
+                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mb-0.5">Email Address</p>
                 <a 
                   href={`mailto:${contactEmail}`} 
-                  className="font-bold text-indigo-600 hover:text-indigo-700 transition-colors duration-150 break-all"
+                  className="font-extrabold text-violet-400 hover:text-violet-300 transition-colors duration-150 break-all hover:underline"
                 >
                   {contactEmail}
                 </a>
@@ -229,14 +234,14 @@ export default function JobDetails() {
 
           {/* Administrative Control Panel */}
           {user ? (
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-5">
-              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100 pb-3">
+            <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80 rounded-2xl p-6 shadow-xl shadow-zinc-950/20 space-y-5">
+              <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800/60 pb-3">
                 Action Center
               </h3>
               
               {/* Status Update Select */}
               <div className="space-y-2.5">
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                   Update Job Status
                 </label>
                 <div className="relative">
@@ -244,15 +249,15 @@ export default function JobDetails() {
                     value={status}
                     disabled={updatingStatus}
                     onChange={(e) => handleStatusChange(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-750 outline-none transition-all duration-150 cursor-pointer disabled:opacity-50"
+                    className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-300 outline-none transition-all duration-200 cursor-pointer disabled:opacity-50"
                   >
-                    <option value="Open">Open</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Closed">Closed</option>
+                    <option value="Open" className="bg-zinc-950">Open</option>
+                    <option value="In Progress" className="bg-zinc-950">In Progress</option>
+                    <option value="Closed" className="bg-zinc-950">Closed</option>
                   </select>
                   {updatingStatus && (
                     <span className="absolute right-10 top-3">
-                      <svg className="animate-spin h-4 w-4 text-indigo-650" fill="none" viewBox="0 0 24 24">
+                      <svg className="animate-spin h-4 w-4 text-violet-500" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
@@ -262,31 +267,31 @@ export default function JobDetails() {
               </div>
 
               {/* Delete Request Section */}
-              <div className="border-t border-slate-100 pt-4">
+              <div className="border-t border-zinc-800/60 pt-4">
                 {!showDeleteConfirm ? (
                   <button
                     onClick={() => setShowDeleteConfirm(true)}
-                    className="w-full bg-red-50 hover:bg-red-100 text-red-700 hover:text-red-800 font-bold py-2.5 px-4 rounded-lg border border-red-200 hover:border-red-300 text-xs transition-all duration-150 text-center"
+                    className="w-full bg-red-950/10 hover:bg-red-950/20 text-red-400 hover:text-red-300 font-bold py-3 px-4 rounded-xl border border-red-900/30 hover:border-red-900/60 text-xs transition-all duration-200 text-center cursor-pointer"
                   >
                     Delete Job Request
                   </button>
                 ) : (
-                  <div className="bg-red-50 border border-red-100 rounded-lg p-4 space-y-3">
-                    <p className="text-xs font-bold text-red-800 leading-normal">
+                  <div className="bg-red-950/20 border border-red-900/40 rounded-xl p-4 space-y-3">
+                    <p className="text-xs font-bold text-red-400 leading-normal">
                       Are you sure you want to delete this job request?
                     </p>
                     <div className="flex space-x-2">
                       <button
                         onClick={handleDelete}
                         disabled={deleting}
-                        className="flex-grow bg-red-650 hover:bg-red-700 text-white font-extrabold py-2 px-3 rounded-lg text-xs transition-all duration-150"
+                        className="flex-grow bg-red-650 hover:bg-red-650 text-white font-extrabold py-2 px-3 rounded-lg text-xs transition-all duration-200"
                       >
                         {deleting ? 'Deleting...' : 'Yes, Delete'}
                       </button>
                       <button
                         onClick={() => setShowDeleteConfirm(false)}
                         disabled={deleting}
-                        className="flex-grow bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-2 px-3 rounded-lg text-xs transition-all duration-150"
+                        className="flex-grow bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-300 font-bold py-2 px-3 rounded-lg text-xs transition-all duration-200"
                       >
                         Cancel
                       </button>
@@ -297,16 +302,16 @@ export default function JobDetails() {
 
             </div>
           ) : (
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm text-center space-y-4">
-              <svg className="w-8 h-8 text-slate-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80 rounded-2xl p-6 shadow-xl text-center space-y-4">
+              <svg className="w-8 h-8 text-zinc-550 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
-              <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                Sign in to claim this job request or modify its status.
+              <p className="text-xs text-zinc-400 font-bold leading-relaxed">
+                Sign in to manage this request or update its status.
               </p>
               <Link 
                 href="/login"
-                className="block w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-lg text-xs border border-slate-200 transition-all duration-150"
+                className="block w-full bg-zinc-800 hover:bg-zinc-700 border border-zinc-700/50 text-zinc-200 hover:text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all duration-200 active:scale-[0.98]"
               >
                 Sign In
               </Link>

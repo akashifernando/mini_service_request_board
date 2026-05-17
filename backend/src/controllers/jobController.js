@@ -7,21 +7,41 @@ const getJobs = async (req, res, next) => {
   try {
     const queryObj = {};
 
-    // Filter by category
+    // Filter by category (Case-Insensitive Match)
     if (req.query.category) {
-      queryObj.category = req.query.category;
+      const allowedCategories = ['Plumbing', 'Electrical', 'Painting', 'Joinery', 'Gardening', 'Cleaning', 'Other'];
+      const matchedCategory = allowedCategories.find(
+        (c) => c.toLowerCase() === req.query.category.toLowerCase()
+      );
+      if (matchedCategory) {
+        queryObj.category = matchedCategory;
+      } else {
+        queryObj.category = req.query.category;
+      }
     }
 
-    // Filter by status
+    // Filter by status (Case-Insensitive Match)
     if (req.query.status) {
-      queryObj.status = req.query.status;
+      const allowedStatuses = ['Open', 'In Progress', 'Closed'];
+      const matchedStatus = allowedStatuses.find(
+        (s) => s.toLowerCase() === req.query.status.toLowerCase()
+      );
+      if (matchedStatus) {
+        queryObj.status = matchedStatus;
+      } else {
+        queryObj.status = req.query.status;
+      }
     }
 
-    // Keyword search across title and description (Case-Insensitive Regex)
+    // Keyword search across title, description, status, category, and location (Case-Insensitive Regex)
     if (req.query.search) {
+      const searchRegex = { $regex: req.query.search, $options: 'i' };
       queryObj.$or = [
-        { title: { $regex: req.query.search, $options: 'i' } },
-        { description: { $regex: req.query.search, $options: 'i' } },
+        { title: searchRegex },
+        { description: searchRegex },
+        { status: searchRegex },
+        { category: searchRegex },
+        { location: searchRegex }
       ];
     }
 

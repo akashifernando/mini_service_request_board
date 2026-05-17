@@ -98,6 +98,83 @@ npm test
 
 ---
 
+## 🔌 API Endpoints
+
+The API is fully documented and structured under the `/api` prefix. Private endpoints require a JSON Web Token (JWT) sent in the HTTP `Authorization` header.
+
+### 🔑 Authentication Endpoints
+
+| Endpoint | Method | Auth Required | Description | Request Body Example |
+| :--- | :--- | :---: | :--- | :--- |
+| `/api/auth/register` | `POST` | ❌ No | Registers a new user. | `{"name": "Jane Doe", "email": "jane@example.com", "password": "password123"}` |
+| `/api/auth/login` | `POST` | ❌ No | Authenticates user and returns JWT. | `{"email": "jane@example.com", "password": "password123"}` |
+| `/api/auth/me` | `GET` | 🔒 Yes | Retrieves current logged-in user profile. | *None (Sends JWT in Auth header)* |
+
+### 🛠️ Job Request Endpoints
+
+| Endpoint | Method | Auth Required | Description |
+| :--- | :--- | :---: | :--- |
+| `/api/jobs` | `GET` | ❌ No | Lists all jobs. Supports query filters (category, status, keyword search). |
+| `/api/jobs/:id` | `GET` | ❌ No | Fetches a single job request by ID. |
+| `/api/jobs` | `POST` | 🔒 Yes | Creates a new job request with fields validation. |
+| `/api/jobs/:id` | `PATCH` | 🔒 Yes | Updates **only** the status of a job. |
+| `/api/jobs/:id` | `DELETE` | 🔒 Yes | Deletes a job request by ID. |
+
+---
+
+#### 📌 Endpoint Details & Payload Specs
+
+#### 🔍 `GET /api/jobs`
+* **Query Parameters**:
+  * `category` *(Optional)*: Filter by job category. Supported: `Plumbing`, `Electrical`, `Painting`, `Joinery`, `Gardening`, `Cleaning`, `Other`.
+  * `status` *(Optional)*: Filter by job status. Supported: `Open`, `In Progress`, `Closed`.
+  * `search` *(Optional)*: Keyword search against `title` and `description` fields (case-insensitive regex search).
+* **Example Request**:
+  `GET /api/jobs?category=Plumbing&status=Open&search=leak`
+
+---
+
+#### 🆕 `POST /api/jobs`
+* **Headers**: `Authorization: Bearer <your_jwt_token>`
+* **Request Body** *(All fields required)*:
+  ```json
+  {
+    "title": "Fix leaking bathroom faucet",
+    "description": "The master bathroom faucet is dripping continuously and needs a washer replacement.",
+    "category": "Plumbing",
+    "location": "London, UK",
+    "contactName": "John Doe",
+    "contactEmail": "john@example.com"
+  }
+  ```
+
+---
+
+#### 🔄 `PATCH /api/jobs/:id`
+* **Headers**: `Authorization: Bearer <your_jwt_token>`
+* **Request Body** *(Only status is allowed and validated)*:
+  ```json
+  {
+    "status": "In Progress"
+  }
+  ```
+  *(Status must be one of: `Open`, `In Progress`, `Closed`)*
+
+---
+
+#### 🗑️ `DELETE /api/jobs/:id`
+* **Headers**: `Authorization: Bearer <your_jwt_token>`
+* **Response**:
+  ```json
+  {
+    "success": true,
+    "message": "Job request successfully deleted",
+    "data": {}
+  }
+  ```
+
+---
+
 ## ⚙️ Environment Variables
 
 ### Backend (`backend/.env`)

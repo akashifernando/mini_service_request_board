@@ -69,26 +69,26 @@ export default function Home() {
   }, [fetchJobs]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow relative">
       
-      {/* Calm Header */}
-      <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          Mini Service Request Board
+      {/* Premium Ambient Header */}
+      <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+          Mini Service <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400">Request Board</span>
         </h1>
-        <p className="text-base text-slate-500 font-medium leading-relaxed">
-          Browse local service requests or post your own. Homeowners connect with certified tradespeople instantly.
+        <p className="text-base text-zinc-400 font-medium leading-relaxed max-w-xl mx-auto">
+          Connecting homeowners with certified, local tradespeople. Browse requests below or post your own service request in minutes.
         </p>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5 mb-8 shadow-sm">
+      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80 rounded-2xl p-6 mb-12 shadow-xl shadow-zinc-950/20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
           
           {/* Keyword Search */}
           <div className="relative md:col-span-2">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+              <svg className="w-5 h-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </span>
@@ -97,7 +97,7 @@ export default function Home() {
               placeholder="Search requests by keyword..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-slate-50/50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+              className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 pl-12 pr-4 text-sm text-zinc-100 placeholder-zinc-500 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
             />
           </div>
 
@@ -106,10 +106,10 @@ export default function Home() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full bg-slate-50/50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-700 outline-none transition-all duration-150 cursor-pointer"
+              className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-300 outline-none transition-all duration-200 cursor-pointer"
             >
               {CATEGORIES.map((cat) => (
-                <option key={cat} value={cat}>
+                <option key={cat} value={cat} className="bg-zinc-950 text-zinc-300">
                   {cat}
                 </option>
               ))}
@@ -121,10 +121,10 @@ export default function Home() {
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full bg-slate-50/50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-700 outline-none transition-all duration-150 cursor-pointer"
+              className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-300 outline-none transition-all duration-200 cursor-pointer"
             >
               {STATUSES.map((stat) => (
-                <option key={stat} value={stat}>
+                <option key={stat} value={stat} className="bg-zinc-950 text-zinc-300">
                   {stat}
                 </option>
               ))}
@@ -138,19 +138,19 @@ export default function Home() {
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
-        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg text-center font-medium max-w-md mx-auto my-10">
+        <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-center font-semibold max-w-md mx-auto my-10">
           <p>{error}</p>
         </div>
       ) : jobs.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-slate-200 p-8 max-w-md mx-auto">
-          <svg className="w-10 h-10 mx-auto text-slate-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <div className="text-center py-16 bg-zinc-900/30 rounded-2xl border border-zinc-800 p-8 max-w-md mx-auto">
+          <svg className="w-12 h-12 mx-auto text-zinc-650 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <h3 className="text-sm font-bold text-slate-800 mb-1">No requests found</h3>
-          <p className="text-xs text-slate-500 mb-5 font-medium">Try modifying your filters, or create a brand new service request!</p>
+          <h3 className="text-base font-bold text-zinc-200 mb-1.5">No requests found</h3>
+          <p className="text-xs text-zinc-500 mb-6 font-medium leading-relaxed">Try adjusting your filter settings, or post a brand new service request!</p>
           <Link 
             href="/jobs/new"
-            className="inline-flex items-center bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold px-4 py-2 rounded border border-indigo-200 text-xs transition-all duration-150"
+            className="inline-flex items-center bg-violet-600/10 hover:bg-violet-600/20 text-violet-400 hover:text-violet-300 font-bold px-5 py-2.5 rounded-xl border border-violet-500/20 hover:border-violet-500/30 text-xs transition-all duration-200"
           >
             Post a New Request
           </Link>
@@ -158,9 +158,12 @@ export default function Home() {
       ) : (
         <div>
           {/* Active Counters */}
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
-              Open Requests <span className="text-[10px] font-semibold bg-slate-100 text-slate-500 px-2 py-0.5 rounded ml-1">{jobs.length} found</span>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center">
+              Active Board Requests 
+              <span className="text-[10px] font-bold bg-zinc-900/80 text-violet-400 border border-zinc-800 px-2.5 py-0.5 rounded-full ml-2">
+                {jobs.length} open
+              </span>
             </h2>
           </div>
 
