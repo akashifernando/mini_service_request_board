@@ -100,12 +100,12 @@ export default function NewJob() {
   if (!user) return null;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow relative">
       
       {/* Back button */}
       <Link 
         href="/"
-        className="inline-flex items-center text-xs font-bold text-slate-600 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300 px-3.5 py-2 rounded-lg transition-all duration-150 mb-8"
+        className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white bg-zinc-900/40 hover:bg-zinc-800 border border-zinc-800/80 px-4 py-2.5 rounded-xl transition-all duration-200 mb-8 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]"
       >
         <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -113,11 +113,11 @@ export default function NewJob() {
         Back to Dashboard
       </Link>
 
-      <div className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm">
+      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80 rounded-2xl p-8 shadow-xl shadow-zinc-950/20">
         
-        <div className="border-b border-slate-100 pb-5 mb-6">
-          <h1 className="text-xl font-bold text-slate-900">Post a Service Request</h1>
-          <p className="text-xs text-slate-500 font-semibold mt-1">
+        <div className="border-b border-zinc-800/60 pb-5 mb-6">
+          <h1 className="text-xl font-bold text-zinc-100">Post a Service Request</h1>
+          <p className="text-xs text-zinc-500 font-semibold mt-1">
             Complete the fields below to describe your service request.
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function NewJob() {
           
           {/* Display validation or server error */}
           {(validationError || error) && (
-            <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg text-xs font-semibold flex items-center space-x-2">
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-xs font-semibold flex items-center space-x-2">
               <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
@@ -138,7 +138,7 @@ export default function NewJob() {
             
             {/* Title */}
             <div className="md:col-span-2">
-              <label htmlFor="title" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="title" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Job Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -149,13 +149,13 @@ export default function NewJob() {
                 placeholder="e.g. Need a plumber for a leaking kitchen tap"
                 maxLength={100}
                 required
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-150 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label htmlFor="category" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="category" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Category <span className="text-red-500">*</span>
               </label>
               <select
@@ -163,10 +163,10 @@ export default function NewJob() {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-700 outline-none transition-all duration-150 cursor-pointer"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-300 outline-none transition-all duration-200 cursor-pointer"
               >
                 {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>
+                  <option key={cat} value={cat} className="bg-zinc-950">
                     {cat}
                   </option>
                 ))}
@@ -175,7 +175,7 @@ export default function NewJob() {
 
             {/* Location */}
             <div>
-              <label htmlFor="location" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="location" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Location (e.g. Glasgow) <span className="text-red-500">*</span>
               </label>
               <input
@@ -185,13 +185,13 @@ export default function NewJob() {
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="e.g. Glasgow West End"
                 required
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-150 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
 
             {/* Description */}
             <div className="md:col-span-2">
-              <label htmlFor="description" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="description" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Detailed Description <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -201,17 +201,17 @@ export default function NewJob() {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Provide details about the issue. What needs fixing?"
                 required
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150 resize-none"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-150 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200 resize-none"
               />
             </div>
 
-            <div className="md:col-span-2 border-t border-slate-100 pt-5 mt-2">
-              <h3 className="text-sm font-bold text-slate-900">Contact Details</h3>
+            <div className="md:col-span-2 border-t border-zinc-800/60 pt-5 mt-2">
+              <h3 className="text-sm font-bold text-zinc-200">Contact Details</h3>
             </div>
 
             {/* Contact Name */}
             <div>
-              <label htmlFor="contactName" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="contactName" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Contact Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -221,13 +221,13 @@ export default function NewJob() {
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Jane Smith"
                 required
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-150 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
 
             {/* Contact Email */}
             <div>
-              <label htmlFor="contactEmail" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+              <label htmlFor="contactEmail" className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Contact Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -237,16 +237,16 @@ export default function NewJob() {
                 onChange={(e) => setContactEmail(e.target.value)}
                 placeholder="jane@example.com"
                 required
-                className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 rounded-lg py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-1 focus:ring-indigo-500/20 transition-all duration-150"
+                className="w-full bg-zinc-950/50 border border-zinc-800 focus:border-violet-500 rounded-xl py-3 px-4 text-sm text-zinc-150 placeholder-zinc-550 outline-none focus:ring-1 focus:ring-violet-500/20 transition-all duration-200"
               />
             </div>
 
           </div>
 
-          <div className="pt-5 border-t border-slate-100 flex items-center justify-end space-x-4">
+          <div className="pt-5 border-t border-zinc-800/60 flex items-center justify-end space-x-4">
             <Link
               href="/"
-              className="text-slate-600 hover:text-slate-900 px-4 py-2.5 text-sm font-semibold hover:bg-slate-100 rounded-lg transition-all duration-150"
+              className="text-zinc-450 hover:text-zinc-200 px-5 py-3 text-sm font-bold hover:bg-zinc-900/40 rounded-xl transition-all duration-200"
             >
               Cancel
             </Link>
@@ -254,7 +254,7 @@ export default function NewJob() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-lg text-sm shadow-sm active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none"
+              className="bg-violet-600 hover:bg-violet-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] text-white font-bold px-6 py-3 rounded-xl text-sm active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
             >
               {loading ? (
                 <div className="flex items-center space-x-2">
