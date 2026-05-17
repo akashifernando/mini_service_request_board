@@ -44,6 +44,157 @@ mini_service_request_board/
 
 ---
 
+## 📊 System Architecture & Workflows
+
+Below is the complete architectural layout and request-response lifecycle sequence diagrams for the Mini Service Request Board application.
+
+### 📐 Structural Block Diagram
+
+```mermaid
+graph TD
+    %% Styling and colors
+    classDef client fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff;
+    classDef server fill:#1d4ed8,stroke:#1e40af,stroke-width:2px,color:#fff;
+    classDef db fill:#047857,stroke:#065f46,stroke-width:2px,color:#fff;
+    
+    subgraph ClientLayer ["Frontend Client - Next.js 14"]
+        Browser["User Browser"]:::client
+        Components["React UI Components"]:::client
+        Context["AuthContext State Manager"]:::client
+        FetchAPI["Native Fetch API Client"]:::client
+    end
+    
+    subgraph ServerLayer ["Backend REST API Service - Node and Express"]
+        ExpressApp["Express Server"]:::server
+        AuthMiddleware["JWT Auth Guard Middleware"]:::server
+        Routes["Router Bindings"]:::server
+        Controllers["Controllers Layer"]:::server
+        ErrorHandler["Global Error Handler"]:::server
+    end
+    
+    subgraph DatabaseLayer ["Database Orchestration - Dockerized MongoDB"]
+        DockerMongo["MongoDB Database Container"]:::db
+        MongooseODM["Mongoose ODM Models"]:::db
+        SeedScript["Database Seeder CLI"]:::db
+    end
+
+    %% Client Layer Interaction
+    Browser --> Components
+    Components --> Context
+    Components --> FetchAPI
+    
+    %% API Requests (HTTP / JSON / JWT)
+    FetchAPI -->|HTTP Requests| ExpressApp
+    ExpressApp --> AuthMiddleware
+    ExpressApp --> Routes
+    Routes --> Controllers
+    Controllers --> ErrorHandler
+    
+    %% Database Interaction
+    Controllers --> MongooseODM
+    MongooseODM --> DockerMongo
+    SeedScript --> DockerMongo
+    
+    %% Response flow
+    ErrorHandler -.->|JSON Error Payload| FetchAPI
+    Controllers -.->|JSON Success Payload| FetchAPI
+    FetchAPI -.->|State Update| Components
+```
+
+### 🔄 Request Lifecycle Workflows
+
+#### 1. 🔐 User Registration & Session Initialization
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Homeowner / Tradesperson
+    participant FE as Next.js Client
+    participant BE as Express REST API
+    participant DB as MongoDB (Docker)
+
+    User->>FE: Fill Registration Form & Submit
+    FE->>FE: Client-side validation (matching passwords, email format)
+    FE->>BE: POST /api/auth/register {name, email, password}
+    BE->>BE: Enforces existence validation
+    BE->>DB: Check if email already registered
+    DB-->>BE: Email available
+    BE->>BE: Hash password using bcryptjs (10 salt rounds)
+    BE->>DB: Save User Document
+    DB-->>BE: Saved successfully
+    BE->>BE: Generate JWT token signed with JWT_SECRET
+    BE-->>FE: HTTP 201: {success: true, data: {token, name, email}}
+    FE->>FE: Store token & user credentials in localStorage
+    FE->>FE: AuthContext state sync -> Redirect to Home dashboard
+```
+
+#### 2. 🆕 Posting a Service Request (Homeowner)
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Authenticated Homeowner
+    participant FE as Next.js Client
+    participant BE as Express REST API
+    participant DB as MongoDB (Docker)
+
+    User->>FE: Fill Job Details & Submit Form
+    FE->>FE: Client-side syntax validation (e.g. Email format regex check)
+    FE->>BE: POST /api/jobs {title, description, category, location, contactName, contactEmail} [Auth: Bearer JWT]
+    BE->>BE: JWT Authentication Middleware verifies & decodes token
+    alt Token is invalid/expired
+        BE-->>FE: HTTP 401: Unauthorized
+    else Token is valid
+        BE->>BE: Extract user ID and append to request context (req.user)
+        BE->>BE: Controller level validation (all fields present)
+        BE->>DB: Save JobRequest Document (links postedBy to user ID)
+        DB-->>BE: Persistence confirmed (Mongoose schema auto-adds timestamps)
+        BE-->>FE: HTTP 201: {success: true, data: JobRequest}
+        FE->>FE: Redirect user back to home dashboard
+    end
+```
+
+#### 3. 🔍 Browsing, Filtering & Searching (Tradesperson)
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Tradesperson
+    participant FE as Next.js Client
+    participant BE as Express REST API
+    participant DB as MongoDB (Docker)
+
+    User->>FE: Type search term "leak" / select category "Plumbing"
+    FE->>BE: GET /api/jobs?search=leak&category=Plumbing
+    BE->>BE: Build query object (translates search string to case-insensitive regex)
+    BE->>DB: Query JobRequest collection sorted by newest (createdAt: -1)
+    DB-->>BE: Returns matching records
+    BE-->>FE: HTTP 200: {success: true, count: X, data: [Jobs]}
+    FE->>FE: Update state -> Render beautiful dark glass cards dynamically
+```
+
+#### 4. 🔄 Transitioning Job Status (Tradesperson)
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Authenticated Tradesperson
+    participant FE as Next.js Client
+    participant BE as Express REST API
+    participant DB as MongoDB (Docker)
+
+    User->>FE: Select Status "In Progress" / "Closed" from Dropdown
+    FE->>BE: PATCH /api/jobs/:id {status: "In Progress"} [Auth: Bearer JWT]
+    BE->>BE: JWT Authentication Middleware validates token
+    alt Token is invalid
+        BE-->>FE: HTTP 401: Unauthorized
+    else Token is valid
+        BE->>BE: Validate that "In Progress" is inside ["Open", "In Progress", "Closed"]
+        BE->>DB: Find JobRequest by ID and update status only
+        DB-->>BE: Document updated successfully
+        BE-->>FE: HTTP 200: {success: true, data: UpdatedJobRequest}
+        FE->>FE: Renders new status color indicators on details card
+    end
+```
+
+---
+
 ## 🚀 Quick Start Guide
 
 Follow these steps to run the complete stack locally in under 3 minutes:
