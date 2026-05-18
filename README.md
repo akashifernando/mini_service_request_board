@@ -2,7 +2,12 @@
 
 A high-performance, premium full-stack web application designed for homeowners to post service requests (e.g. plumbing, electrical, carpentry, painting) and tradespeople to search, filter, and track project status changes.
 
-This repository satisfies all **Core Brief Requirements** and **all optional Bonus Features** in an enterprise-grade, clean-separated directory structure.
+---
+
+### 🌐 Live Production URLs
+
+* **🖥️ Deployed Frontend Website**: [https://frontend-omega-six-h9ai2mbbnz.vercel.app](https://frontend-omega-six-h9ai2mbbnz.vercel.app)
+* **🔌 Deployed Express REST API**: [https://backend-gamma-eight-77.vercel.app/api/jobs](https://backend-gamma-eight-77.vercel.app/api/jobs)
 
 ---
 
