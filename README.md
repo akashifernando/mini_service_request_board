@@ -393,10 +393,10 @@ PORT=5001
 MONGODB_URI=mongodb://127.0.0.1:27018/service-request-board
 
 # 2. Production (using MongoDB Atlas Cloud Cluster):
-# MONGODB_URI=mongodb+srv://akashanifernando_db_user:TJXnHpsc79In7R9l@cluster0.cxow04v.mongodb.net/service-request-board?retryWrites=true&w=majority
+# MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.cxow04v.mongodb.net/service-request-board?retryWrites=true&w=majority
 
-JWT_SECRET=supersecretkeyforglobaltnaassessment
-NODE_ENV=development
+JWT_SECRET=
+NODE_ENV=
 ```
 
 ### Frontend (`frontend/.env.local`)
